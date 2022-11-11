@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nodebb-ingress
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-issuer
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: nodebb.evasquezapplaudo.ga
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nodebb
+            port:
+              number: 4567
+  tls:
+  - hosts:
+    - nodebb.evasquezapplaudo.ga
+    secretName: nodebb-cert-tls
