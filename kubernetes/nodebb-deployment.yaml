@@ -33,12 +33,8 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/nodebb
               name: nodebb-claim0
-            - mountPath: /usr/src/nodebb/build
+            - mountPath: /usr/src/nodebb
               name: nodebb-claim1
-            - mountPath: /usr/src/nodebb/node_modules
-              name: nodebb-claim2
-            - mountPath: /usr/src/nodebb/public/uploads
-              name: nodebb-claim3
             - mountPath: /opt/nodebb/config
               name: nodebb-claim4
             - mountPath: /opt/nodebb/build
@@ -51,12 +47,6 @@ spec:
         - name: nodebb-claim1
           persistentVolumeClaim:
             claimName: nodebb-claim1
-        - name: nodebb-claim2
-          persistentVolumeClaim:
-            claimName: nodebb-claim2
-        - name: nodebb-claim3
-          persistentVolumeClaim:
-            claimName: nodebb-claim3
         - name: nodebb-claim4
           persistentVolumeClaim:
             claimName: nodebb-claim4
