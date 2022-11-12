@@ -39,7 +39,7 @@ spec:
               name: nodebb-claim2
             - mountPath: /usr/src/nodebb/public/uploads
               name: nodebb-claim3
-      restartPolicy: Never
+      restartPolicy: OnFailure
       volumes:
         - name: nodebb-claim0
           persistentVolumeClaim:
