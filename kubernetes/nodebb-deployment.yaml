@@ -40,6 +40,7 @@ spec:
             - mountPath: /usr/src/nodebb/public/uploads
               name: nodebb-claim3
             - mountPath: /opt/nodebb/config
+              name: nodebb-claim4
       restartPolicy: Always
       volumes:
         - name: nodebb-claim0
@@ -56,5 +57,5 @@ spec:
             claimName: nodebb-claim3
         - name: nodebb-claim4
           persistentVolumeClaim:
-            claimName: nodebb-claim3
+            claimName: nodebb-claim4
 status: {}
