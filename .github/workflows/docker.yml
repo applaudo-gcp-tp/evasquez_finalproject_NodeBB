@@ -31,7 +31,7 @@ jobs:
         with:
           registry: gcr.io
           project_id: ${{ secrets.GOOGLE_PROJECT_ID }}
-          image_name: pterodactyl
+          image_name: nodebb
           image_tag: ${{ github.ref_name }}
           dockerfile: ./Dockerfile
           context: .
