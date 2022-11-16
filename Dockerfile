@@ -1,25 +1,43 @@
-FROM node:lts
+#
+# Dockerfile for nodebb
+#
 
-RUN mkdir -p /usr/src/app && \
-    chown -R node:node /usr/src/app
-WORKDIR /usr/src/app
+FROM debian:bullseye
+MAINTAINER EasyPi Software Foundation
 
-ARG NODE_ENV
-ENV NODE_ENV $NODE_ENV
+ARG BB_VER=2.5.8
+ARG BB_URL=https://github.com/NodeBB/NodeBB/archive/v$BB_VER.tar.gz
 
-COPY --chown=node:node install/package.json /usr/src/app/package.json
+ENV BB_SOURCE=/usr/src/nodebb
+ENV BB_CONTENT=/var/lib/nodebb
 
-USER node
+WORKDIR $BB_SOURCE
+VOLUME $BB_CONTENT
 
-RUN npm install --only=prod && \
-    npm cache clean --force
+RUN set -ex \
+    && apt-get update \
+    && apt-get install -y build-essential \
+                          curl \
+                          git \
+                          imagemagick \
+                          libssl1.0.0 \
+                          libssl-dev \
+                          python \
+    && curl -sSL https://deb.nodesource.com/setup_10.x | bash - \
+    && apt-get install -y nodejs \
+    && curl -sSL $BB_URL | tar xz --strip 1 \
+    && npm install --production \
+    && npm cache clean \
+    && apt-get remove -y build-essential \
+                         curl \
+                         git \
+                         libssl-dev \
+                         python \
+    && rm -rf /tmp/npm* \
+              /var/cache/apt/*
 
-COPY --chown=node:node . /usr/src/app
-
-ENV NODE_ENV=production \
-    daemon=false \
-    silent=false
+COPY docker-entrypoint.sh /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 4567
-
-CMD test -n "${SETUP}" && ./nodebb setup || node ./nodebb build; node ./nodebb start
+CMD ["npm", "start"]
