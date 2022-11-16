@@ -35,6 +35,8 @@ spec:
               name: nodebb-claim0
             - mountPath: /usr/src/nodebb
               name: nodebb-claim1
+            - mountPath: /usr/src/app/build
+              name: nodebb-claim2
             - mountPath: /opt/nodebb/config
               name: nodebb-claim4
             - mountPath: /opt/nodebb/build
@@ -47,6 +49,9 @@ spec:
         - name: nodebb-claim1
           persistentVolumeClaim:
             claimName: nodebb-claim1
+        - name: nodebb-claim2
+          persistentVolumeClaim:
+            claimName: nodebb-claim2
         - name: nodebb-claim4
           persistentVolumeClaim:
             claimName: nodebb-claim4
