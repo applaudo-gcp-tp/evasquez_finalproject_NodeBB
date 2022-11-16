@@ -25,7 +25,7 @@ spec:
         io.kompose.service: nodebb
     spec:
       containers:
-        - image: vimagick/nodebb
+        - image: gcr.io/applaudo-final-project-ed/nodebb:v2.5.10
           name: nodebb
           ports:
             - containerPort: 4567
@@ -47,9 +47,6 @@ spec:
         - name: nodebb-claim1
           persistentVolumeClaim:
             claimName: nodebb-claim1
-        - name: nodebb-claim2
-          persistentVolumeClaim:
-            claimName: nodebb-claim2
         - name: nodebb-claim4
           persistentVolumeClaim:
             claimName: nodebb-claim4
