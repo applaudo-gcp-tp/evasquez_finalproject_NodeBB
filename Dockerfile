@@ -14,6 +14,9 @@ ENV BB_CONTENT=/var/lib/nodebb
 WORKDIR $BB_SOURCE
 VOLUME $BB_CONTENT
 
+RUN echo "deb http://security.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list
+RUN apt-get update -y && apt-get install -y --no-install-recommends \
+    libssl1.0.0
 RUN set -ex \
     && apt-get update \
     && apt-get install -y build-essential \
