@@ -43,4 +43,4 @@ ENV daemon=false
 
 EXPOSE 4567
 
-CMD ["./nodebb", "--config", "config/config.json", "start"]
+CMD ["./nodebb", "--config", "config.json", "start"]
