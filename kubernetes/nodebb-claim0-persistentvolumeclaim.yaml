@@ -6,6 +6,7 @@ metadata:
     io.kompose.service: nodebb-claim0
   name: nodebb-claim0
 spec:
+  storageClassName: standard-rwo
   accessModes:
     - ReadWriteOnce
   resources:
@@ -22,6 +23,7 @@ metadata:
     io.kompose.service: nodebb-claim1
   name: nodebb-claim1
 spec:
+  storageClassName: standard-rwo
   accessModes:
     - ReadWriteOnce
   resources:
@@ -38,6 +40,7 @@ metadata:
     io.kompose.service: nodebb-claim4
   name: nodebb-claim4
 spec:
+  storageClassName: standard-rwo
   accessModes:
     - ReadWriteOnce
   resources:
@@ -55,6 +58,7 @@ metadata:
     io.kompose.service: nodebb-claim5
   name: nodebb-claim5
 spec:
+  storageClassName: standard-rwo
   accessModes:
     - ReadWriteOnce
   resources:
