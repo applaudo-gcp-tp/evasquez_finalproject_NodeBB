@@ -7,7 +7,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-  - host: nodebb.evasquezapplaudo.ga
+  - host: nodebb.evasquezapplaudo.tk
     http:
       paths:
       - path: /
@@ -19,5 +19,5 @@ spec:
               number: 4567
   tls:
   - hosts:
-    - nodebb.evasquezapplaudo.ga
+    - nodebb.evasquezapplaudo.tk
     secretName: nodebb-cert-tls
