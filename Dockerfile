@@ -2,45 +2,49 @@
 # Dockerfile for nodebb
 #
 
-FROM debian:bullseye
+FROM alpine:3
 MAINTAINER EasyPi Software Foundation
 
-ARG BB_VER=2.5.8
+ARG BB_VER=2.2.4
 ARG BB_URL=https://github.com/NodeBB/NodeBB/archive/v$BB_VER.tar.gz
+ARG BB_DIR=/opt/nodebb
+ARG BB_CONTENT=/opt/nodebb/config
 
-ENV BB_SOURCE=/usr/src/nodebb
-ENV BB_CONTENT=/var/lib/nodebb
-
-WORKDIR $BB_SOURCE
+WORKDIR $BB_DIR
 VOLUME $BB_CONTENT
 
-RUN echo "deb http://security.debian.org/debian-security jessie/updates main" >> /etc/apt/sources.list
-RUN apt-get update -y && apt-get install -y --no-install-recommends \
-    libssl1.0.0
 RUN set -ex \
-    && apt-get update \
-    && apt-get install -y build-essential \
-                          curl \
-                          git \
-                          imagemagick \
-                          libssl1.0.0 \
-                          libssl-dev \
-                          python \
-    && curl -sSL https://deb.nodesource.com/setup_10.x | bash - \
-    && apt-get install -y nodejs \
+    && apk add -U bash \
+                  icu \
+                  imagemagick \
+                  nodejs \
+                  npm \
+                  openssl \
+    && apk add -t TMP build-base \
+                      curl \
+                      git \
+                      icu-dev \
+                      openssl-dev \
+                      python3 \
+                      tar \
     && curl -sSL $BB_URL | tar xz --strip 1 \
+    && curl -sSL https://github.com/NodeBB/NodeBB/raw/v$BB_VER/install/package.json > package.json \
     && npm install --production \
-    && npm cache clean \
-    && apt-get remove -y build-essential \
-                         curl \
-                         git \
-                         libssl-dev \
-                         python \
+    && apk del TMP \
     && rm -rf /tmp/npm* \
-              /var/cache/apt/*
+              /var/cache/apk/*
+
+VOLUME $BB_DIR/config \
+       $BB_DIR/build \
+       $BB_DIR/public/uploads
+
+ENV NODE_ENV=production
+ENV silent=false
+ENV daemon=false
 
 COPY docker-entrypoint.sh /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 4567
-CMD ["npm", "start"]
+
+CMD ["./nodebb", "--config", "config/config.json", "start"]
