@@ -33,6 +33,12 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/nodebb
               name: nodebb-claim0
+            - mountPath: /usr/src/nodebb
+              name: nodebb-claim1
+            - mountPath: /opt/nodebb/config
+              name: nodebb-claim4
+            - mountPath: /opt/nodebb/build
+              name: nodebb-claim5
       restartPolicy: Always
       volumes:
         - name: nodebb-claim0
