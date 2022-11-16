@@ -37,6 +37,23 @@ kind: PersistentVolumeClaim
 metadata:
   creationTimestamp: null
   labels:
+    io.kompose.service: nodebb-claim2
+  name: nodebb-claim2
+spec:
+  storageClassName: standard-rwo
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+status: {}
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  creationTimestamp: null
+  labels:
     io.kompose.service: nodebb-claim4
   name: nodebb-claim4
 spec:
@@ -63,5 +80,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 1Gi
+      storage: 100Mi
 status: {}
