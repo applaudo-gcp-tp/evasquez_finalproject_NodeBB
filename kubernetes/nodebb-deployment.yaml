@@ -25,7 +25,7 @@ spec:
         io.kompose.service: nodebb
     spec:
       containers:
-        - image: gcr.io/applaudo-final-project-ed/nodebb:v2.2.4
+        - image: gcr.io/applaudo-final-project-ed/nodebb:v2.5.11
           name: nodebb
           ports:
             - containerPort: 4567
@@ -35,10 +35,8 @@ spec:
               name: nodebb-claim0
             - mountPath: /usr/src/nodebb
               name: nodebb-claim1
-            - mountPath: /opt/nodebb/config
+            - mountPath: /opt/nodebb
               name: nodebb-claim4
-            - mountPath: /opt/nodebb/build
-              name: nodebb-claim5
       restartPolicy: Always
       volumes:
         - name: nodebb-claim0
@@ -50,7 +48,4 @@ spec:
         - name: nodebb-claim4
           persistentVolumeClaim:
             claimName: nodebb-claim4
-        - name: nodebb-claim5
-          persistentVolumeClaim:
-            claimName: nodebb-claim5
 status: {}

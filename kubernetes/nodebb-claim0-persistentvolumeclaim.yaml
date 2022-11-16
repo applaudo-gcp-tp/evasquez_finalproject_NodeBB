@@ -46,23 +46,5 @@ spec:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 100Mi
-status: {}
-
----
-
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  creationTimestamp: null
-  labels:
-    io.kompose.service: nodebb-claim5
-  name: nodebb-claim5
-spec:
-  storageClassName: standard-rwo
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+      storage: 4Gi
 status: {}
