@@ -6,7 +6,7 @@
 FROM alpine:3
 MAINTAINER EasyPi Software Foundation
 
-ARG BB_VER=2.5.8
+ARG BB_VER=2.2.4
 ARG BB_URL=https://github.com/NodeBB/NodeBB/archive/v$BB_VER.tar.gz
 ARG BB_DIR=/opt/nodebb
 
