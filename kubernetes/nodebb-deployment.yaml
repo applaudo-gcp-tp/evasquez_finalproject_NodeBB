@@ -35,6 +35,8 @@ spec:
               name: nodebb-claim0
             - mountPath: /usr/src/nodebb
               name: nodebb-claim1
+            - mountPath: /usr/src/app/
+              name: nodebb-claim2
             - mountPath: /opt/nodebb/config
               name: nodebb-claim4
             - mountPath: /opt/nodebb/build
