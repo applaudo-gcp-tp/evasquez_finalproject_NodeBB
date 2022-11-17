@@ -59,7 +59,6 @@ metadata:
     io.kompose.service: nodebb-claim5
   name: nodebb-claim5
 spec:
-  storageClassName: standard-rwo
   accessModes:
     - ReadWriteOnce
   resources:
