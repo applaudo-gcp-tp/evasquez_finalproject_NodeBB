@@ -1,45 +1,21 @@
+FROM node:lts
 
-#
-# Dockerfile for nodebb
-#
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-FROM alpine:3
-MAINTAINER EasyPi Software Foundation
+ARG NODE_ENV
+ENV NODE_ENV $NODE_ENV
 
-ARG BB_VER=2.2.4
-ARG BB_URL=https://github.com/NodeBB/NodeBB/archive/v$BB_VER.tar.gz
-ARG BB_DIR=/opt/nodebb
+COPY install/package.json /usr/src/app/package.json
 
-WORKDIR $BB_DIR
+RUN npm install --only=prod && \
+    npm cache clean --force
 
-RUN set -ex \
-    && apk add -U bash \
-                  icu \
-                  imagemagick \
-                  nodejs \
-                  npm \
-                  openssl \
-    && apk add -t TMP build-base \
-                      curl \
-                      git \
-                      icu-dev \
-                      openssl-dev \
-                      python3 \
-                      tar \
-    && curl -sSL $BB_URL | tar xz --strip 1 \
-    && curl -sSL https://github.com/NodeBB/NodeBB/raw/v$BB_VER/install/package.json > package.json \
-    && npm install --production \
-    && apk del TMP \
-    && rm -rf /tmp/npm* \
-              /var/cache/apk/*
+COPY . /usr/src/app
 
-VOLUME $BB_DIR/config \
-       $BB_DIR/build \
-       $BB_DIR/public/uploads
-
-ENV NODE_ENV=production
-ENV silent=false
-ENV daemon=false
+ENV NODE_ENV=production \
+    daemon=false \
+    silent=false
 
 EXPOSE 4567
 
