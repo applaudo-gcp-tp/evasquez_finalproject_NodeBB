@@ -595,10 +595,10 @@ install.setup = async function () {
 };
 
 install.save = async function (server_conf) {
-	let serverConfigPath = path.join(__dirname, '../config.json');
+	let serverConfigPath = path.join(__dirname, '../config/config.json');
 
 	if (nconf.get('config')) {
-		serverConfigPath = path.resolve(__dirname, '../', nconf.get('config'));
+		serverConfigPath = path.resolve(__dirname, '../config/', nconf.get('config'));
 	}
 
 	let currentConfig = {};

@@ -1,47 +1,22 @@
-#
-# Dockerfile for nodebb
-#
+FROM node:lts
 
-FROM alpine:3
-MAINTAINER EasyPi Software Foundation
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-ARG BB_VER=2.5.8
-ARG BB_URL=https://github.com/NodeBB/NodeBB/archive/v$BB_VER.tar.gz
-ARG BB_DIR=/opt/nodebb
+ARG NODE_ENV
+ENV NODE_ENV $NODE_ENV
 
-WORKDIR $BB_DIR
+COPY install/package.json /usr/src/app/package.json
 
-RUN set -ex \
-    && apk add -U bash \
-                  icu \
-                  imagemagick \
-                  nodejs \
-                  npm \
-                  openssl \
-    && apk add -t TMP build-base \
-                      curl \
-                      git \
-                      icu-dev \
-                      openssl-dev \
-                      python3 \
-                      tar \
-    && curl -sSL $BB_URL | tar xz --strip 1 \
-    && curl -sSL https://github.com/NodeBB/NodeBB/raw/v$BB_VER/install/package.json > package.json \
-    && npm install --production \
-    && apk del TMP \
-    && rm -rf /tmp/npm* \
-              /var/cache/apk/*
+RUN npm install --only=prod && \
+    npm cache clean --force
 
-VOLUME $BB_DIR/config \
-       $BB_DIR/build \
-       $BB_DIR/public/uploads
+COPY . /usr/src/app
 
-RUN ./nodebb build
-
-ENV NODE_ENV=production
-ENV silent=false
-ENV daemon=false
+ENV NODE_ENV=production \
+    daemon=false \
+    silent=false
 
 EXPOSE 4567
 
-CMD ["./nodebb", "--config", "config/config.json", "start"]
+CMD test -n "${SETUP}" && ./nodebb setup || node ./nodebb build; node ./nodebb start --config config/config.json
