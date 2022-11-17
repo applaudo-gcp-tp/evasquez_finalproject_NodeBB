@@ -5,7 +5,7 @@
 FROM alpine:3
 MAINTAINER EasyPi Software Foundation
 
-ARG BB_VER=2.2.4
+ARG BB_VER=2.5.8
 ARG BB_URL=https://github.com/NodeBB/NodeBB/archive/v$BB_VER.tar.gz
 ARG BB_DIR=/opt/nodebb
 
@@ -39,7 +39,11 @@ VOLUME $BB_DIR/config \
 ENV NODE_ENV=production
 ENV silent=false
 ENV daemon=false
+ENV BB_DIR=/opt/nodebb
+
+COPY docker-entrypoint.sh $BB_DIR/entrypoint.sh
+ENTRYPOINT ["/opt/nodebb/entrypoint.sh"]
 
 EXPOSE 4567
 
-CMD ["./nodebb", "--config", "config/config.json", "start"]
+CMD ["./nodebb","--config","config/config.json", "start"]
