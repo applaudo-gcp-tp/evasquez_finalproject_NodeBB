@@ -25,7 +25,7 @@ spec:
         io.kompose.service: nodebb
     spec:
       containers:
-        - image: vimagick/nodebb
+        - image: gcr.io/applaudo-final-project-ed/nodebb:vdev
           name: nodebb
           ports:
             - containerPort: 4567
