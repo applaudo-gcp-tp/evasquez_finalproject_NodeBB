@@ -1,5 +1,5 @@
 nodebb:
-  image: vimagick/nodebb
+  image: nodebb:v0.1
   ports:
     - "4567:4567"
   links:
