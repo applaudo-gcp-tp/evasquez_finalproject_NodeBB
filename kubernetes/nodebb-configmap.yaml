@@ -1,0 +1,19 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: null
+  name: server-config
+data:
+  config.json: |
+    {
+      "url": "http://nodebb.evasquezapplaudo.ga",
+      "secret": "d9a02374-5cba-4c99-8610-b971a5c7588c",
+      "database": "redis",
+      "port": "4567",
+      "redis": {
+          "host": "10.211.232.51",
+          "port": "6379",
+          "password": "",
+          "database": "0"
+      }
+    }

@@ -31,11 +31,18 @@ spec:
             - containerPort: 4567
           resources: {}
           volumeMounts:
-            - mountPath: /usr/src/app/build
-              name: nodebb-claim5
+            - name: nodebb-claim5
+              mountPath: /usr/src/app/build
+            - name: nodebb-configmap
+              mountPath: /usr/src/app/ 
+              subPath: config.json
+
       restartPolicy: Always
       volumes:
         - name: nodebb-claim5
           persistentVolumeClaim:
             claimName: nodebb-claim5
+        - name: nodebb-configmap
+          configMap:
+            name: server-config
 status: {}
