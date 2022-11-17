@@ -32,10 +32,10 @@ spec:
           resources: {}
           volumeMounts:
             - name: nodebb-claim5
-              mountPath: /usr/src/app/build
+              mountPath: /opt/nodebb/build
             - name: nodebb-configmap
-              mountPath: /usr/src/app/config
-              
+              mountPath: /opt/nodebb/config
+
       restartPolicy: Always
       volumes:
         - name: nodebb-claim5
