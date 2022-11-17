@@ -34,8 +34,7 @@ spec:
             - name: nodebb-claim5
               mountPath: /usr/src/app/build
             - name: nodebb-configmap
-              mountPath: /usr/src/app/ 
-              subPath: config.json
+              mountPath: /usr/src/app/
 
       restartPolicy: Always
       volumes:
