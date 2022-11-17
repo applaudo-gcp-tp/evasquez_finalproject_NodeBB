@@ -8,10 +8,8 @@ MAINTAINER EasyPi Software Foundation
 ARG BB_VER=2.2.4
 ARG BB_URL=https://github.com/NodeBB/NodeBB/archive/v$BB_VER.tar.gz
 ARG BB_DIR=/opt/nodebb
-ARG BB_CONTENT=/opt/nodebb/config
 
 WORKDIR $BB_DIR
-VOLUME $BB_CONTENT
 
 RUN set -ex \
     && apk add -U bash \
@@ -41,9 +39,6 @@ VOLUME $BB_DIR/config \
 ENV NODE_ENV=production
 ENV silent=false
 ENV daemon=false
-
-COPY docker-entrypoint.sh /entrypoint.sh
-ENTRYPOINT ["/entrypoint.sh"]
 
 EXPOSE 4567
 
