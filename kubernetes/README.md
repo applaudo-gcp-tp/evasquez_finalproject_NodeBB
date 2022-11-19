@@ -44,7 +44,7 @@ In this repo, in Kubernetes folder are the Kubernetes manifests to deploy the ap
 The next diagram shows how the application works, the deployment creates the pod with a container, nodebb container connects to the Redis Database through a VPC Network Peering created on the network, The Redis database is created in a google managed service Memorystore.
 Then the NodeBB app its exposed via service and allows connections and visibility from outside through a nginx ingress object, connecting to the load balancer.
 
-![Application Diagram]()
+![Application Diagram](https://github.com/EdEngineering/Images/blob/main/Final%20Project%20Diagrams-NodeBB%20App.drawio.png?raw=true)
 
 
 
