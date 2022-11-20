@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: 10.102.4.18
+    server: nfs-server.nfs-server.svc.cluster.local
     path: "/"
 ---
 apiVersion: v1
@@ -40,7 +40,7 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: 10.102.4.18
+    server: nfs-server.nfs-server.svc.cluster.local
     path: "/"
 
 ---
